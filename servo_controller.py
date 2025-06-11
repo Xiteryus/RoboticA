@@ -44,6 +44,9 @@ if __name__ == "__main__":
     init = 90
     while True:
         response = int(input("Servomoteur ? (0 moteur, 1 tete de gauche a droite, 2 tete de haut en bas) :  "))
+        # channel 0 pour actionner les roues (le port 0)
+        # channel 1 pour actionner la tete de gauche à droite  
+        # channel 2 pour actionner la tete de haut en bas 
         angle = int(input("Angle : ? (entre 0 et 180)"))
         init = slow_angle(response,init,angle)
     
