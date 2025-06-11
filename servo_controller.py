@@ -26,11 +26,24 @@ def set_angle(ID, angle):
     servo_angle = servo.Servo(pca.channels[ID], min_pulse=500, max_pulse=2400,actuation_range=180)
     servo_angle.angle = angle
       
-
+def slow_angle(channel, init, final): #on fait tourner lentement le servo 
+    if(final > init): 
+        for i in range(init, final): 
+            set_angle(channel, i)
+            time.sleep(0.01)
+        time.sleep(0.5)
+        
+    else:
+        for i in range(init, final, -1):
+            set_angle(channel, i)
+            time.sleep(0.01)
+        time.sleep(0.5)
+    return final
 
 if __name__ == "__main__":
+    init = 90
     while True:
         response = int(input("Servomoteur ? (0 moteur, 1 tete de gauche a droite, 2 tete de haut en bas) :  "))
         angle = int(input("Angle : ? (entre 0 et 180)"))
-        set_angle(response,angle)
+        init = slow_angle(response,init,angle)
     
