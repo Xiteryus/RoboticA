@@ -117,6 +117,10 @@ if __name__ == "__main__":
   switchSetup()
   set_all_switch_off()
   while 1:
+    # led sur la carte : led 1 à 3 
+    # led gauche avant : 4
+    # led droite avant : 5 
+    # led sur la carte à coté du bouton : 10 
     response = int(input("Quelle led modifier ?(1-3: Carte;  LED_G : 4; LED_D : 5; WS : 10): "))
     if (response>0 and response<4):
       status = int(input("Eteindre (0) ou Allumer (1) : "))
