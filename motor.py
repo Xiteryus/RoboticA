@@ -78,6 +78,24 @@ def motor_drive(speed, sens, pente):
       s = (i / steps) * speed 
       Motor(1, sens, s)
       time.sleep(delay)
+# moove forward and backward , left and right 
+def forward():
+    motor_drive(25, 1, 1)
+    time.sleep(2)
+    motorStop()
+
+def backward ():
+    motor_drive(25, -1, 1)
+    time.sleep(2)
+    motorStop()
+
+def left():
+    init = 90 
+    init = slow_angle(0, init, init + 30)
+
+def right(): 
+    init = 90 
+    init = slow_angle(0, init, init - 30)
     
 # 4 
 def control():
