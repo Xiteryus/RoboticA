@@ -4,8 +4,10 @@ from board import SCL, SDA
 import busio
 from adafruit_pca9685 import PCA9685
 from adafruit_motor import motor
-
+import keyboard 
 from servo_controller import *
+from ultrasound import * 
+from servo_reboot import * 
 
 MOTOR_M1_IN1 = 15
 MOTOR_M1_IN2 = 14
@@ -77,32 +79,59 @@ def motor_drive(speed, sens, pente):
       Motor(1, sens, s)
       time.sleep(delay)
     
-    
-# 4
+# 4 
 def control():
-  init = 90
-  while True:
-    x = input("T : ").lower()
-    if x =="z":
-      motor_drive(25,1,1)
-      time.sleep(2)
-      motorStop()
-    elif x =="s":
-      motor_drive(25,-1,1)
-      time.sleep(2)
-      motorStop()
-    elif x =="q":
-      init = slow_angle(0,init,init+30)
-    elif x =="d":
-      init = slow_angle(0,init,init-30)
-      
-    elif x =="r":
-      motorStop()
+    reboot()
+    init = 90
+    init_GD = 90
+    init_HB = 90
+
+    try:
+        while True:
+            
+            if keyboard.is_pressed("z"):
+                motor_drive(25, 1, 1)
+                time.sleep(2)
+                motorStop()
+                
+            elif keyboard.is_pressed("s"):
+                motor_drive(25, -1, 1)
+                time.sleep(2)
+                motorStop()
+            elif keyboard.is_pressed("q"):
+                init = slow_angle(0, init, init + 30)
+                time.sleep(0.2)
+            elif keyboard.is_pressed("d"):
+                init = slow_angle(0, init, init - 30)
+                time.sleep(0.2)
+            elif keyboard.is_pressed("8"):
+                init_HB = slow_angle(2, init_HB, init_HB + 30)
+                time.sleep(0.2)
+            elif keyboard.is_pressed("5"):
+                init_HB = slow_angle(2, init_HB, init_HB - 30)
+                time.sleep(0.2)
+            elif keyboard.is_pressed("4"):
+                init_GD = slow_angle(1, init_GD, init_GD + 30)
+                time.sleep(0.2)
+            elif keyboard.is_pressed("6"):
+                init_GD = slow_angle(1, init_GD, init_GD - 30)
+                time.sleep(0.2)
+            elif keyboard.is_pressed("0"):
+                distance = checkdist()
+                print("%.2f mm" % distance)
+                time.sleep(0.5)
+            elif keyboard.is_pressed("r"):
+                motorStop()
+                time.sleep(0.2)
+            elif keyboard.is_pressed("esc"):
+                break
+            time.sleep(0.05)
+    finally:
+        destroy()
+
 
      
 
 
 if __name__ == "__main__":
   control()
-  
-    
