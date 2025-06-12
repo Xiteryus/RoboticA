@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle Robot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .button-container {
+      margin: 20px;
+    }
+
+    .action-button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background-color: #2980b9;
+    }
+
+    .control-section {
+      display: flex;
+      justify-content: space-around;
+      margin: 40px auto;
+      flex-wrap: wrap;
+      max-width: 800px;
+    }
+
+    .controller {
+      display: grid;
+      grid-template-columns: 60px 60px 60px;
+      grid-template-rows: 60px 60px 60px;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arrow-button {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .arrow-button:hover {
+      background-color: #27ae60;
+    }
+
+    .radar-button {
+      grid-column: 2;
+      grid-row: 2;
+      background-color: #e67e22;
+    }
+
+    .title-section {
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Controle du Robot</h1>
+
+
+  <div class="button-container">
+      <form method="POST" action="/led-gauche">
+    <button type="submit" class="action-button">Allumer LED Gauche</button>
+      </form>
+    
+    <form method="POST" action="/leds">
+      <button type="submit" class="action-button">BoumBoum</button>
+    </form>
+    
+    
+    <button class="action-button">Fonction 3</button>
+  </div>
+
+
+  <div class="control-section">
+    <div>
+    <form method="POST" action="/moteur">
+      <div class="title-section">Controle Moteur</div>
+      <div class="controller">
+        <div></div>
+        <button class="arrow-button" name="direction" value="haut"  >&#8593;</button>
+        <div></div>
+        <button class="arrow-button" name="direction" value="gauche">&#8592;</button>
+        <div></div>
+        <button class="arrow-button" name="direction" value="droite">&#8594;</button>
+        <div></div>
+        <button class="arrow-button" name="direction" value="bas">&#8595;</button>
+        <div></div>
+      </form>
+      </div>
+    </div>
+
+
+    <div>
+      <div class="title-section">Controle Tete + Radar</div>
+      <div class="controller">
+        <div></div>
+        <button class="arrow-button">&#8593;</button>
+        <div></div>
+        <button class="arrow-button">&#8592;</button>
+        <button class="arrow-button radar-button">R</button>
+        <button class="arrow-button">&#8594;</button>
+        <div></div>
+        <button class="arrow-button">&#8595;</button>
+        <div></div>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+</body>
+</html>
