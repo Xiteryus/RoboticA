@@ -30,7 +30,7 @@ if __name__ == "__main__":
         direction = 1
         while True:
             # mise a jour de la map de detection
-            detection_map[angle//10] = detection(angle)
+            detection_map[(angle//10)-1] = detection(angle)
             print("\n", detection_map)
 
             # affichage graphique
