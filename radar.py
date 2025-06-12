@@ -17,7 +17,7 @@ def servo_initialisation(angle):
     set_angle(1, angle)
 
 def detection(angle):
-    if angle >= 0 or angle <= 180:
+    if angle >= 10 or angle <= 180:
         set_angle(1, angle)
         sleep(0.1)
         return round(checkdist(), 1)
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     angle = 90
     servo_initialisation(angle)
     try:
-        detection_map = [None]*19
+        detection_map = [0]*18
         direction = 1
         while True:
             # mise a jour de la map de detection
@@ -50,7 +50,7 @@ if __name__ == "__main__":
             # mise a jour du sens de direction
             if angle >= 180 and direction == 1:
                 direction = 0
-            elif angle <= 0 and direction == 0:
+            elif angle <= 10 and direction == 0:
                 direction = 1
             
             # mise a jour de l'angle
@@ -62,4 +62,4 @@ if __name__ == "__main__":
         print("\nArret")
     finally:
         print("Reinitialisation des servomoteurs")
-        servo_initialisation(90)
+        servo_initialisation(100)
