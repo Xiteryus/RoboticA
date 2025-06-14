@@ -5,41 +5,62 @@
   <title>Controle Robot</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
       background-color: #f4f4f4;
-    }
-
-    h1 {
-      margin-top: 20px;
       color: #333;
     }
 
-    .button-container {
-      margin: 20px;
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 22px;
+      color: #2c3e50;
+    }
+
+    .sub-section-title {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #34495e;
+    }
+
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
     }
 
     .action-button {
-      padding: 15px 30px;
-      margin: 10px;
+      padding: 14px 26px;
       font-size: 16px;
       background-color: #3498db;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     .action-button:hover {
       background-color: #2980b9;
-    }
-
-    .control-section {
-      display: flex;
-      justify-content: space-around;
-      margin: 40px auto;
-      flex-wrap: wrap;
-      max-width: 800px;
     }
 
     .controller {
@@ -47,17 +68,19 @@
       grid-template-columns: 60px 60px 60px;
       grid-template-rows: 60px 60px 60px;
       gap: 10px;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      margin: 20px auto;
     }
 
     .arrow-button {
+      font-size: 24px;
       background-color: #2ecc71;
       color: white;
       border: none;
       border-radius: 10px;
-      font-size: 24px;
       cursor: pointer;
+      padding: 10px;
     }
 
     .arrow-button:hover {
@@ -70,67 +93,145 @@
       background-color: #e67e22;
     }
 
-    .title-section {
-      margin-bottom: 10px;
-      font-weight: bold;
-      font-size: 18px;
+    .future-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .box_controller{
+      display: flex; 
+      justify-content: space-around; 
+      flex-wrap: wrap; 
+      gap: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Controle du Robot</h1>
 
+  <h1>RoboticA</h1>
+  <div class="container">
 
-  <div class="button-container">
-      <form method="POST" action="/led-gauche">
-    <button type="submit" class="action-button">Allumer LED Gauche</button>
-      </form>
-    
-    <form method="POST" action="/leds">
-      <button type="submit" class="action-button">BoumBoum</button>
-    </form>
-    
-    
-    <button class="action-button">Fonction 3</button>
-  </div>
-
-
-  <div class="control-section">
-    <div>
-    <form method="POST" action="/moteur">
-      <div class="title-section">Controle Moteur</div>
-      <div class="controller">
-        <div></div>
-        <button class="arrow-button" name="direction" value="haut"  >&#8593;</button>
-        <div></div>
-        <button class="arrow-button" name="direction" value="gauche">&#8592;</button>
-        <div></div>
-        <button class="arrow-button" name="direction" value="droite">&#8594;</button>
-        <div></div>
-        <button class="arrow-button" name="direction" value="bas">&#8595;</button>
-        <div></div>
-      </form>
+    <!--LED Fonctionelle -->
+    <div class="box">
+      <h2>Controle des LEDs</h2>
+      <div class="button-grid">
+        <form method="POST" action="/led-gauche">
+          <button type="submit" class="action-button">Allumer LED Gauche</button>
+        </form>
+        <form method="POST" action="/leds">
+          <button type="submit" class="action-button">BoumBoum</button>
+        </form>
       </div>
     </div>
 
+  <div class="box">
+    <h2>Controller</h2>
 
-    <div>
-      <div class="title-section">Controle Tete + Radar</div>
-      <div class="controller">
-        <div></div>
-        <button class="arrow-button">&#8593;</button>
-        <div></div>
-        <button class="arrow-button">&#8592;</button>
-        <button class="arrow-button radar-button">R</button>
-        <button class="arrow-button">&#8594;</button>
-        <div></div>
-        <button class="arrow-button">&#8595;</button>
-        <div></div>
+    <div class="box_controller">
+
+      <!-- Moteur -->
+      <div>
+        <div class="sub-section-title">Moteur</div>
+        <form method="POST" action="/moteur">
+          <div class="controller">
+            <div></div>
+            <button class="arrow-button" name="direction" value="haut">&#8593;</button>
+            <div></div>
+            <button class="arrow-button" name="direction" value="gauche">&#8592;</button>
+            <button class="arrow-button radar-button" name="direction" value="stop">R</button>
+            <button class="arrow-button" name="direction" value="droite">&#8594;</button>
+            <div></div>
+            <button class="arrow-button" name="direction" value="bas">&#8595;</button>
+            <div></div>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="sub-section-title">Tete / Radar</div>
+        <div class="controller">
+          <div></div>
+          <button class="arrow-button">&#8593;</button>
+          <div></div>
+          <button class="arrow-button">&#8592;</button>
+          <button class="arrow-button radar-button">R</button>
+          <button class="arrow-button">&#8594;</button>
+          <div></div>
+          <button class="arrow-button">&#8595;</button>
+          <div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    
+    <div class="box">
+      <h2>Flux Camera</h2>
+      <div style="text-align: center;">
+        <img src="/video_feed" style="width: 640px; border-radius: 12px;">
       </div>
     </div>
-    
-    
-    
+
+    <div class="box">
+      <h2>Fonctionnalites </h2>
+      <div class="future-buttons">
+        <form method="POST" action="/angle_reboot">
+          <button type="submit" class="action-button">Reset_angle</button>
+        </form>
+        <button class="action-button">Radar</button>
+        <button class="action-button">Suivi Ligne</button>
+        <button class="action-button">Detection couleur</button>
+        <button class="action-button">Autonome</button>
+        
+        <form method="GET" action="/take_photo">
+          <button type="submit" class="action-button">Photo</button>
+        </form>
+      </div>
+    </div>
+
   </div>
+
+  <script>
+    document.addEventListener("keydown", function(event) {
+      if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") return;
+
+      function sendDirection(direction) {
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/moteur";
+
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "direction";
+        input.value = direction;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      }
+
+      switch (event.key) {
+        case "z":
+          sendDirection("haut");
+          break;
+        case "s":
+          sendDirection("bas");
+          break;
+        case "q":
+          sendDirection("gauche");
+          break;
+        case "d":
+          sendDirection("droite");
+          break;
+        case "r":
+          sendDirection("stop");
+          break;
+      }
+    });
+  </script>
+
 </body>
 </html>
