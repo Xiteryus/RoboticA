@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle Robot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+
+  <h1>RoboticA</h1>
+  <div class="container">
+
+    <!-- LED Fonctionnelle -->
+    <div class="box">
+      <h2>Contrôle des LEDs</h2>
+      <div class="button-grid">
+        <form method="POST" action="/led-gauche">
+          <button type="submit" class="action-button">Allumer LED Gauche</button>
+        </form>
+        <form method="POST" action="/leds">
+          <button type="submit" class="action-button">BoumBoum</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Contrôleur</h2>
+      <div class="box_controller">
+
+        <!-- Moteur -->
+        <div>
+          <div class="sub-section-title">Moteur</div>
+          <div class="controller">
+            
+            <button class="arrow-button" data-dir="haut">&#8593;</button>
+            <div></div>
+            <form method="POST" action="/moove">
+              <button class="arrow-button" data-dir="gauche">&#8592;</button>
+              <button class="arrow-button radar-button" data-dir="stop">R</button>
+              <button class="arrow-button" data-dir="droite">&#8594;</button>
+            </form>
+            
+            <button class="arrow-button" data-dir="bas">&#8595;</button>
+            <div></div>
+          </div>
+        </div>
+
+       
+        <div>
+          <div class="sub-section-title">Tête / Radar</div>
+          <div class="controller">
+            <div></div>
+            <button class="arrow-button">&#8593;</button>
+            <div></div>
+            <button class="arrow-button">&#8592;</button>
+            <button class="arrow-button radar-button">R</button>
+            <button class="arrow-button">&#8594;</button>
+            <div></div>
+            <button class="arrow-button">&#8595;</button>
+            <div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    
+    <div class="box">
+      <h2>Flux Caméra</h2>
+      <div style="text-align: center;">
+        <img src="/video_feed" style="width: 640px; border-radius: 12px;">
+      </div>
+    </div>
+
+    
+    <div class="box">
+      <h2>Fonctionnalités</h2>
+      <div class="future-buttons">
+        <form method="POST" action="/angle_reboot">
+          <button type="submit" class="action-button">Reset_angle</button>
+        </form>
+        <button class="action-button">Radar</button>
+        <button class="action-button">Suivi Ligne</button>
+        <button class="action-button">Détection Couleur</button>
+        <button class="action-button">Autonome</button>
+        <form method="GET" action="/take_photo">
+          <button type="submit" class="action-button">Photo</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+</body>
+</html>
