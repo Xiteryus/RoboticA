@@ -1,3 +1,6 @@
+# -*- coding: Windows-1252 -*-
+
+
 #!/usr/bin/env python3
 import time
 from board import SCL, SDA
@@ -9,6 +12,7 @@ from servo_controller import *
 from ultrasound import * 
 from servo_reboot import * 
 
+#initialisation du moteur
 MOTOR_M1_IN1 = 15
 MOTOR_M1_IN2 = 14
 
@@ -19,11 +23,11 @@ i2c = busio.I2C(SCL, SDA)
 pwm_motor = PCA9685(i2c, address=0x5f)
 pwm_motor.frequency = 50
 
-
-
-
 motor1 = motor.DCMotor(pwm_motor.channels[MOTOR_M1_IN1], pwm_motor.channels[MOTOR_M1_IN2])
 motor1.decay_mode = motor.SLOW_DECAY
+
+
+init = 90
 
 
 def Motor(channel,direction,motor_speed):
@@ -78,8 +82,11 @@ def motor_drive(speed, sens, pente):
       s = (i / steps) * speed 
       Motor(1, sens, s)
       time.sleep(delay)
-# moove forward and backward , left and right 
+#------
+# functions to move the robots and the head 
+# robots
 def forward():
+    
     motor_drive(25, 1, 1)
     time.sleep(2)
     motorStop()
@@ -88,15 +95,45 @@ def backward ():
     motor_drive(25, -1, 1)
     time.sleep(2)
     motorStop()
-
+    
+def drive(direction):
+    motor_drive(25, direction, 1)
+"""
 def left():
-    init = 90 
-    init = slow_angle(0, init, init + 30)
+    global init 
+    angle = min(init+20, 150)
+    init = slow_angle(0, init, angle)
 
 def right(): 
-    init = 90 
-    init = slow_angle(0, init, init - 30)
+    global init 
+    angle = max(init -20,40)
+    init = slow_angle(0, init, angle )
+
+"""
+def left_right(direction):
+    global init
     
+    if direction == "gauche":
+      angle = min(init+20, 130)
+    elif direction =="droite":
+      angle = max(init-20, 60)
+
+      
+    init = slow_angle(0,init, angle)
+    print(init)
+    
+# head 
+def up():
+    slow_angle(2, init_HB, init_HB + 30)
+
+def down():
+    slow_angle(2, init_HB, init_HB - 30)
+
+def head_left():
+    slow_angle(1, init_GD, init_GD + 30)
+
+def head_right():
+    slow_angle(1, init_GD, init_GD - 30)
 # 4 
 def control():
     reboot()
