@@ -38,6 +38,9 @@ def tracking(virage):
     print("Current : ",status_left," +", status_middle, " + ", status_right,"\n")
 
     if status_left == 0 and status_middle == 0 and status_right == 0: #1
+      motor_25()
+      sleep(1)
+      motorStop()
       motorStop()
       print(virage)
       if virage == -1: 
@@ -55,22 +58,27 @@ def tracking(virage):
 
       #else:
       #motorStop()
-      motor_25_negative()
-      sleep(1.5)
+      while(status_left !=1 and status_middle !=1 and status_right !=1):
+        status_right = right.value
+        status_middle = middle.value
+        status_left = left.value
+        motor_25_negative()
       motorStop()
       if virage == -1:
-        set_angle(0,ANGLE_SHARP_LEFT)
+        set_angle(0,ANGLE_LEFT)
+        
+        
       elif virage == 1:
-       set_angle(0, ANGLE_SHARP_RIGHT)
+        set_angle(0, ANGLE_RIGHT)
       sleep(0.5)
       motor_25()
-      sleep(1.5)
+      
 
     else :
       drive()
       if status_left == 0 and status_middle == 0 and status_right == 1: #2
         set_angle(0,ANGLE_SHARP_RIGHT)
-        virage = -1
+        virage = 1
         
       elif status_left == 0 and status_middle == 1 and status_right == 0: #3
         set_angle(0,ANGLE_CENTER)
