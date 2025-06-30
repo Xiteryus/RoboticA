@@ -4,6 +4,8 @@ from servo_controller_improved import servo_controller
 from gpiozero import InputDevice
 from servo_controller import *
 
+from ultrasound import*
+
 # Configuration des pins des capteurs de ligne
 line_pin_left = 17
 line_pin_middle = 27
@@ -125,15 +127,18 @@ if __name__ == "__main__":
     counter = 0
     virage = 0 # -1=gauche ; 0=toutdroit ; 1=droit
     
-    while True :
+    while checkdist() > 150 :
         
         #if counter == 5:
           #status_left_before, status_middle_before, status_right_before = tracking(status_left_before, status_middle_before, status_right_before
           #counter = 0
         a,b,c,virage = tracking(virage)
         print("Past : ",status_left_before," +", status_middle_before, " + ", status_right_before)
+        
+        
         #counter = counter +1
         
         #if(status_left_before==0 and status_middle_before==0 and status_right_before==0 ):
         #  break
-        
+    motorStop()
+    
