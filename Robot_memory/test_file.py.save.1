@@ -1,0 +1,125 @@
+import RPi.GPIO as GPIO
+import time
+
+def switchSetup(): # Python function designed to configure
+
+  GPIO.setwarnings(False) # Disables GPIO warnings, which can be helpful
+
+  GPIO.setmode(GPIO.BCM) # Sets the GPIO pin numbering mode to BCM
+
+  GPIO.setup(, GPIO.OUT) # Configures pin 5 as output pins.
+
+  GPIO.setup(6, GPIO.OUT) # Configures pin 6 as output pins.
+
+  GPIO.setup(13, GPIO.OUT) # Configures pin 13 as output pins.
+
+  GPIO.setup(12, GPIO.OUT)
+
+  GPIO.setup(4, GPIO.OUT)
+
+  GPIO.setup(21, GPIO.OUT)
+
+  GPIO.setup(26, GPIO.OUT)
+
+  GPIO.setup(17, GPIO.OUT)
+
+  GPIO.setup(18, GPIO.OUT)
+
+  GPIO.setup(27, GPIO.OUT)
+
+def switch(port, status):
+  if port == 1:
+    if status == 1:
+      GPIO.output(5, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(5,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 2:
+    if status == 1:
+      GPIO.output(6, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(6,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 3:
+    if status == 1:
+      GPIO.output(13, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(13,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 4:
+    if status == 1:
+      GPIO.output(12, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(12,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 5:
+    if status == 1:
+      GPIO.output(4, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(4,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 6:
+    if status == 1:
+      GPIO.output(21, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(21,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 7:
+    if status == 1:
+      GPIO.output(26, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(26,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 8:
+    if status == 1:
+      GPIO.output(17, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(17,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 9:
+    if status == 1:
+      GPIO.output(18, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(18,GPIO.LOW)
+    else:
+      pass # Do nothing
+  elif port == 10:
+    if status == 1:
+      GPIO.output(27, GPIO.HIGH)
+    elif status == 0:
+      GPIO.output(27,GPIO.LOW)
+    else:
+      pass # Do nothing
+  else:
+    print('Wrong Command: Example--switch(3, 1)->to switch on port3')
+    
+
+def set_all_switch_off(): 
+  switch(1,0) 
+  switch(2,0) 
+  switch(3,0) 
+  switch(4,0) 
+  switch(5,0) 
+  switch(6,0) 
+  switch(7,0) 
+  switch(8,0)
+  switch(9,0)
+  switch(10,0)  
+if __name__ == "__main__":
+  switchSetup()
+  set_all_switch_off()
+  while 1:
+    response = int(input("Quelle led modifier ?(1-10): "))
+    status = int(input("Eteindre (0) ou Allumer (1) : "))
+    if status == 0:  
+      switch(response,0)
+    elif status == 1:
+      switch(response,1)
